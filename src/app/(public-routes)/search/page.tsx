@@ -11,15 +11,24 @@ const page = async ({
 }) => {
   const { q } = await searchParams;
   // when user navigates back to the search page ui requires a hard reload
-  const searchedanime = await getSearchedAnime({ searchTerm: q });
-  if (searchedanime.data.length === 0) {
+  const { data: searchedanime, error } = await getSearchedAnime({
+    searchTerm: q,
+  });
+  if (error) {
+    return (
+      <>
+        <p className="text-red-500">{error}</p>
+      </>
+    );
+  }
+  if (searchedanime?.data.length === 0) {
     return notFound();
   }
 
   return (
     <section className="section-padding">
       <CardList<SearchResult>
-        contentList={searchedanime.data}
+        contentList={searchedanime?.data || []}
         heading="top series"
         cardLink="/tv"
         renderItem={(series, index) => (

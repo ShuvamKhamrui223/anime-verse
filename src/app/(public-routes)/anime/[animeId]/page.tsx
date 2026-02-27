@@ -1,8 +1,6 @@
 import { getAnimeDetailsById } from "@/utils/data-fetching";
-import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import DetailsSections from "@/components/details-page-components/details-sections";
-
 
 // export async function generateMetadata({
 //   params,
@@ -21,14 +19,19 @@ import DetailsSections from "@/components/details-page-components/details-sectio
 
 const page = async ({ params }: { params: Promise<{ animeId: string }> }) => {
   const { animeId } = await params;
-  const { data: animeDetails } = await getAnimeDetailsById({ id: animeId });
-
-  if (!animeDetails) {
-    return notFound();
+  const {
+    data: { data: animeDetails },
+    error,
+  } = await getAnimeDetailsById({ id: animeId });
+  if (error) {
+    return (
+      <>
+        <p className="text-red-500">{error}</p>
+      </>
+    );
   }
 
-  return (
-<DetailsSections animeDetails={animeDetails} />  );
+  return <DetailsSections animeDetails={animeDetails} />;
 };
 
 export default page;

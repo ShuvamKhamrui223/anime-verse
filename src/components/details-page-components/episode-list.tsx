@@ -3,9 +3,18 @@ import Link from "next/link";
 import ImageWithFallback from "../helpers/image-with-fallback";
 
 const EpisodeList = async ({ animeId }: { animeId: number }) => {
-  const episodeData = await getEpisodesByAnimeId({ animeId });
-
-  if (episodeData.data.length == 0) {
+  const {
+    data: { data: episodes },
+    error,
+  } = await getEpisodesByAnimeId({ animeId });
+  if (error) {
+    return (
+      <>
+        <p className="text-red-500">{error}</p>
+      </>
+    );
+  }
+  if (episodes.length === 0) {
     return null;
   }
   return (
@@ -14,7 +23,7 @@ const EpisodeList = async ({ animeId }: { animeId: number }) => {
         episodes
       </h3>
       <ul className="flex gap-8 items-center overflow-x-hidden">
-        {episodeData.data.map((episode) => (
+        {episodes.map((episode) => (
           <li key={episode.title} className="shrink-0 basis-2xs flex flex-col">
             <Link href={episode?.url ?? ""}>
               <div className="h-40 w-full relative rounded-2xl overflow-hidden">

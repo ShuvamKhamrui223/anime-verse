@@ -2,7 +2,7 @@ import { IAnimeDetails } from "@/types/anime-details";
 import { AnimeNews } from "@/types/anime-news";
 import { AnimeRecommendations } from "@/types/anime-recommendations";
 import { Reviews as AnimeReviews } from "@/types/anime-reviews";
-import { IAnimeStatistics } from "@/types/anime-statistics";
+import { AnimeStatistics, IAnimeStatistics } from "@/types/anime-statistics";
 import { IEpisodes } from "@/types/episodes";
 import { IGenres } from "@/types/gneres";
 import { ISearchedAnime } from "@/types/search"
@@ -32,33 +32,56 @@ export async function fetchAnime(url: URL, contentType?: "tv" | "movie" | "ova" 
     if (contentType) { url.searchParams.set("type", contentType) }
     if (filterContent) url.searchParams.set("filter", filterContent)
 
+    try {
+        const res = await fetch(url.toString(), options);
 
-    const res = await fetch(url.toString(), options);
+        const data = await res.json()
+        return {
+            data: data,
+            error: null
+        }
+    } catch (error) {
+        if (error instanceof Error) {
+            return {
+                data: null,
+                error: error.message
+            }
+        }
 
-    if (!res.ok) notFound()
-
-    const data = await res.json()
-    return data
+        return {
+            data: null,
+            error: "something went wrong"
+        }
+    }
 }
 
 
 export async function getTop10Anime() {
     const newURL = new URL("https://api.jikan.moe/v4/top/anime")
     const res = await fetchAnime(newURL)
-    return res as ITopAnime
+    return {
+        data: res.data as ITopAnime,
+        error: res.error,
+    }
 }
 
 export const getTopAnimeMovies = async () => {
     const newURL = new URL("https://api.jikan.moe/v4/top/anime")
     const res = await fetchAnime(newURL, "movie")
-    return res as ITopMovies
+    return {
+        data: res.data as ITopMovies,
+        error: res.error,
+    }
 }
 
 
 export const getTopAnimeTVSeries = async () => {
     const newURL = new URL("https://api.jikan.moe/v4/top/anime")
     const res = await fetchAnime(newURL, "tv",)
-    return res as ITVSeries
+    return {
+        data: res.data as ITVSeries,
+        error: res.error,
+    }
 }
 
 export const getTopAnimeSeries_paginated = async ({ limit, page }: { page: number, limit: number }) => {
@@ -85,7 +108,10 @@ export const getUpcomingAnimeMovies = async () => {
 export const getAnimeDetailsById = async ({ id }: { id: string }) => {
     const newURL = new URL(`https://api.jikan.moe/v4/anime/${id}/full`)
     const res = await fetchAnime(newURL)
-    return res as IAnimeDetails
+    return {
+        data: res.data as IAnimeDetails,
+        error: res.error,
+    }
 
 }
 
@@ -93,32 +119,47 @@ export const getAnimeDetailsById = async ({ id }: { id: string }) => {
 export const getEpisodesByAnimeId = async ({ animeId }: { animeId: number }) => {
     const newURL = new URL(`https://api.jikan.moe/v4/anime/${animeId}/episodes`)
     const res = await fetchAnime(newURL)
-    return res as IEpisodes
+    return {
+        data: res.data as IEpisodes,
+        error: res.error,
+    }
 }
 
 export const getAnimeReviewsByAnimeId = async ({ animeId }: { animeId: number }) => {
     const newURL = new URL(`https://api.jikan.moe/v4/anime/${animeId}/reviews`)
     const res = await fetchAnime(newURL)
-    return res as AnimeReviews
+    return {
+        data: res.data as AnimeReviews,
+        error: res.error,
+    }
 }
 
 export const getAnimeNewsArticlesByAnimeId = async ({ animeId }: { animeId: number }) => {
     const newURL = new URL(`https://api.jikan.moe/v4/anime/${animeId}/news`)
     const res = await fetchAnime(newURL)
-    return res as AnimeNews
+    return {
+        data: res.data as AnimeNews,
+        error: res.error,
+    }
 }
 
 export const getAnimeStatisticsByAnimeId = async ({ animeId }: { animeId: number }) => {
     const newURL = new URL(`https://api.jikan.moe/v4/anime/${animeId}/statistics`)
     const res = await fetchAnime(newURL)
-    return res as IAnimeStatistics
+    return {
+        data: res.data as AnimeStatistics,
+        error: res.error,
+    }
 }
 
 
 export const getRecommendationsByAnimeId = async ({ animeId }: { animeId: number }) => {
     const newURL = new URL(`https://api.jikan.moe/v4/anime/${animeId}/recommendations`)
     const res = await fetchAnime(newURL)
-    return res as AnimeRecommendations
+    return {
+        data: res.data as AnimeRecommendations,
+        error: res.error,
+    }
 }
 
 export const getSearchedAnime = async ({ searchTerm }: { searchTerm: string }) => {
@@ -128,7 +169,24 @@ export const getSearchedAnime = async ({ searchTerm }: { searchTerm: string }) =
     newURL.searchParams.set("page", "1")
     newURL.searchParams.set("order_by", "popularity")
 
-    const res = await fetch(newURL, options)
-    const data = await res.json() as ISearchedAnime
-    return data
+    try {
+        const res = await fetch(newURL, options)
+        const data = await res.json()
+        return {
+            data: data as ISearchedAnime,
+            error: null,
+        }
+    } catch (error) {
+        if (error instanceof Error) {
+            return {
+                data: null,
+                error: error.message
+            }
+        }
+
+        return {
+            data: null,
+            error: "something went wrong"
+        }
+    }
 }

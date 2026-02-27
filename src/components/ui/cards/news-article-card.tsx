@@ -1,4 +1,3 @@
-import ImageWithFallback from "@/components/helpers/image-with-fallback";
 import { AnimeNewsArticleEntry } from "@/types/anime-news";
 import { formatDate } from "@/utils/formatters";
 import Link from "next/link";

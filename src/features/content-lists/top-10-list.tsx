@@ -2,7 +2,17 @@ import VerticalCard from "@/components/ui/cards/vertical-card";
 import { getTop10Anime } from "@/utils/data-fetching";
 
 const Top10List = async () => {
-  const top10 = await getTop10Anime();
+  const {
+    data: { data: top10 },
+    error,
+  } = await getTop10Anime();
+  if (error) {
+    return (
+      <>
+        <p className="text-red-500">{error}</p>
+      </>
+    );
+  }
   return (
     <>
       {
@@ -12,7 +22,7 @@ const Top10List = async () => {
           </h2>
 
           <ul className={`horizontal-list`}>
-            {top10.data.map((anime, index) => (
+            {top10.map((anime, index) => (
               <VerticalCard
                 index={index}
                 link={`/anime/${anime.mal_id}`}

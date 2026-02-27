@@ -4,14 +4,24 @@ import { TVSeries } from "@/types/top-tv-series";
 import { getTopAnimeTVSeries } from "@/utils/data-fetching";
 
 const page = async () => {
-  const topSeries = await getTopAnimeTVSeries();
-  if (topSeries.data.length === 0) {
+  const {
+    data: { data: topSeries },
+    error,
+  } = await getTopAnimeTVSeries();
+  if (error) {
+    return (
+      <>
+        <p className="text-red-500">{error}</p>
+      </>
+    );
+  }
+  if (topSeries.length === 0) {
     return <p className="text-lg text-zinc-200">no content found</p>;
   }
   return (
     <section className="section-padding">
       <CardList<TVSeries>
-        contentList={topSeries.data}
+        contentList={topSeries}
         heading="top series"
         cardLink="/tv"
         renderItem={(series, index) => (

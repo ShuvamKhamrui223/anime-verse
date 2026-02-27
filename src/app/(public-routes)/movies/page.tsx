@@ -4,11 +4,25 @@ import { TopMovie } from "@/types/top-movies";
 import { getTopAnimeMovies } from "@/utils/data-fetching";
 
 const page = async () => {
-  const movies = await getTopAnimeMovies();
+  const {
+    data: { data: movies },
+    error,
+  } = await getTopAnimeMovies();
+  if (error) {
+    return (
+      <>
+        <p className="text-red-500">{error}</p>
+      </>
+    );
+  }
+
+  if(movies.length===0){
+    return 
+  }
   return (
     <section className="section-padding">
       <CardList<Readonly<TopMovie>>
-        contentList={movies.data}
+        contentList={movies}
         cardLink={"/movies"}
         heading="top movies"
         renderItem={(anime, index) => (

@@ -1,8 +1,6 @@
 import { getAnimeDetailsById } from "@/utils/data-fetching";
-import { Metadata } from "next";
 import DetailsSections from "../../../../components/details-page-components/details-sections";
 import { IFullDetails } from "@/types/anime-details";
-import { notFound } from "next/navigation";
 
 // export async function generateMetadata({
 //   params,
@@ -21,14 +19,19 @@ import { notFound } from "next/navigation";
 
 const page = async ({ params }: { params: Promise<{ movieId: string }> }) => {
   const { movieId } = await params;
-  const animeDetails = await getAnimeDetailsById({ id: movieId });
-
-  if (!animeDetails.data) {
-    return notFound();
+  const {
+    data: { data: movieDetails },
+    error,
+  } = await getAnimeDetailsById({ id: movieId });
+  if (error) {
+    return (
+      <>
+        <p className="text-red-500">{error}</p>
+      </>
+    );
   }
 
-  // return <h1 className="">{animeDetails.data.title}</h1>;
-  return <DetailsSections<IFullDetails> animeDetails={animeDetails.data} />;
+  return <DetailsSections<IFullDetails> animeDetails={movieDetails} />;
 };
 
 export default page;

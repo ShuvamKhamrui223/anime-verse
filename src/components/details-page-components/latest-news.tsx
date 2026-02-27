@@ -14,7 +14,7 @@ const LatestNews = async ({ animeId }: { animeId: number }) => {
     );
   }
 
-  if (newsData.length === 0) {
+  if (!newsData?.length) {
     return null;
   }
   return (

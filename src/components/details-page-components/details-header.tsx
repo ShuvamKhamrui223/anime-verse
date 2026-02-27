@@ -50,7 +50,7 @@ function DetailsHeader<T extends IFullDetails>({
               studio
             </span>
             <span className="text-zinc-300">
-              {data.studios.map((st) => st.name).join(", ")}
+              {data?.studios?.map((st) => st.name).join(", ")}
             </span>
           </div>
           <div className="flex flex-col">

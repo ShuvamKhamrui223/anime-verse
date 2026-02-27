@@ -30,7 +30,9 @@ const page = async ({ params }: { params: Promise<{ animeId: string }> }) => {
       </>
     );
   }
-
+  if (!animeDetails) {
+    return <>no data found</>;
+  }
   return <DetailsSections animeDetails={animeDetails} />;
 };
 

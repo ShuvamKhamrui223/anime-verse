@@ -13,7 +13,7 @@ const Recommendations = async ({ animeId }: { animeId: number }) => {
       </>
     );
   }
-  if (recommendations.length === 0) return null;
+  if (!recommendations?.length) return null;
   return (
     <section className="flex flex-col gap-8">
       <h3 className="text-2xl font-semibold text-zinc-200 capitalize">

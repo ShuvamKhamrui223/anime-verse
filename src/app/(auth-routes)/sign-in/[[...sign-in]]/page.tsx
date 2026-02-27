@@ -8,7 +8,7 @@ const page = () => {
         src={"/bg-sign-in.jpg"}
         alt="login background"
         fill
-        className="object-center h-full w-full  object-cover -z-10 aspect-video"
+        className="object-center h-full w-full  object-cover aspect-video"
       />
         <SignIn />
     </section>

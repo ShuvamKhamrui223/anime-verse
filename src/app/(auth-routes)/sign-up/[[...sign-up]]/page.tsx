@@ -8,7 +8,7 @@ const page = () => {
         src={"/bg-sign-up.jpg"}
         alt="sign up background"
         fill
-        className="object-cover -z-10 aspect-video"
+        className="object-cover aspect-video"
       />
 
       <SignUp />

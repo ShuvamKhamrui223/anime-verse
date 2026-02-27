@@ -1,6 +1,6 @@
 import { getEpisodesByAnimeId } from "@/utils/data-fetching";
-import Image from "next/image";
 import Link from "next/link";
+import ImageWithFallback from "../helpers/image-with-fallback";
 
 const EpisodeList = async ({ animeId }: { animeId: number }) => {
   const episodeData = await getEpisodesByAnimeId({ animeId });
@@ -13,27 +13,24 @@ const EpisodeList = async ({ animeId }: { animeId: number }) => {
       <h3 className="text-2xl font-semibold text-zinc-200 capitalize">
         episodes
       </h3>
-      <ul className="flex gap-8 items-center custom-carousel">
+      <ul className="flex gap-8 items-center overflow-x-hidden">
         {episodeData.data.map((episode) => (
           <li key={episode.title} className="shrink-0 basis-2xs flex flex-col">
             <Link href={episode?.url ?? ""}>
               <div className="h-40 w-full relative rounded-2xl overflow-hidden">
-                {episode.images?.jpg?.image_url ? (
-                  <Image
-                    src={episode.images?.jpg?.image_url}
-                    alt={episode.title}
-                    fill
-                    loading="lazy"
-                    className="object-cover invert hover:scale-105 transition-transform duration-150 rounded-2xl"
-                  />
-                ) : (
-                  <Image
-                    src={"/landscape-placeholder.svg"}
-                    alt={episode.title}
-                    fill
-                    className="object-cover invert-100 rounded-2xl hover:scale-105 transition-transform duration-150"
-                  />
-                )}
+                {/* {episode.images?.jpg?.image_url ? ( */}
+                <ImageWithFallback
+                  src={
+                    episode.images?.jpg?.image_url ||
+                    "/landscape-placeholder.svg"
+                  }
+                  alt={episode.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  loading="lazy"
+                  className="object-cover invert hover:scale-105 transition-transform duration-150 rounded-2xl"
+                />
+                {/* )  */}
               </div>
               <div className="py-2 px-2">
                 <p className="text-sm text-zinc-300 first-letter:uppercase">

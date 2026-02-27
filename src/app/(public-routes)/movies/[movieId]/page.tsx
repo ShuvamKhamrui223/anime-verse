@@ -23,7 +23,7 @@ const page = async ({ params }: { params: Promise<{ movieId: string }> }) => {
   const { movieId } = await params;
   const animeDetails = await getAnimeDetailsById({ id: movieId });
 
-  if (!animeDetails) {
+  if (!animeDetails.data) {
     return notFound();
   }
 

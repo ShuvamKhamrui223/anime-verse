@@ -33,7 +33,7 @@ const LoaderMore = () => {
             cardContent={data}
             index={index}
             key={`${index}-${data.mal_id}`}
-            link={`${data.type === "tv" || "movies" ? data.type.toLocaleLowerCase() : "anime"}/${data.mal_id}`}
+            link={`${data.type === "tv" || data.type === "movie" ? data.type.toLocaleLowerCase() : "anime"}/${data.mal_id}`}
           />
         ))}
       </ul>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import FramerCard from "./framer-card";
 import { singleAnime } from "@/types/top-anime";
+import ImageWithFallback from "@/components/helpers/image-with-fallback";
 
 interface Props<T> {
   cardContent: T;
@@ -20,7 +21,7 @@ function VerticalCard<T extends singleAnime>({ cardContent, link, index }: Props
     >
       <Link href={link}>
         <div className="w-full h-80 relative overflow-hidden">
-          <Image
+          <ImageWithFallback
             className="object-cover w-full hover:brightness-90"
             src={
               cardContent.images.webp === undefined

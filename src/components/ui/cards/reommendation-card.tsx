@@ -13,7 +13,12 @@ const RecommendationCard = ({
         <div className="w-full h-80 relative">
           <Image
             className="object-cover w-full rounded"
-            src={cardContent.entry.images.webp.large_image_url}
+            src={
+              cardContent.entry.images.webp.large_image_url ||
+              cardContent.entry.images.jpg.large_image_url ||
+              "/landscape-placeholder.svg"
+            }
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             alt={cardContent.entry.title}
             fill
           />

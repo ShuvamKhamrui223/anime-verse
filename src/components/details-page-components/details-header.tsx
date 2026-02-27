@@ -13,10 +13,11 @@ function DetailsHeader<T extends IFullDetails>({
       <div className="h-100 md:h-180 md:basis-1/3 relative flex items-center justify-center p-10 bg-linear-to-b from-zinc-700 to-transparent rounded-3xl">
         <Image
           src={
-            data?.images?.jpg?.large_image_url === undefined
-              ? data.images.webp.large_image_url
-              : data.images.jpg.large_image_url
+            data?.images?.jpg?.large_image_url ||
+            data?.images?.webp?.large_image_url ||
+            "/landscape-placeholder.svg"
           }
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           fill
           alt={data.title}
           className="object-contain scale-[85%]"
@@ -26,7 +27,7 @@ function DetailsHeader<T extends IFullDetails>({
       <div className="flex flex-col px-8 py-6">
         <div className="flex items-center gap-4">
           <p className="inline-flex text-orange-400">
-            <Image src={"/star.svg"} alt="star icon" height={15} width={15} />
+            <Image src={"/star.svg"} alt="star icon" height={15} width={15}  />
             <span className="ml-2 font-medium text-lg">
               {data.score} Rating
             </span>

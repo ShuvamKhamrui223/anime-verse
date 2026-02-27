@@ -15,7 +15,7 @@ const seriespage = async () => {
         heading="top series"
         cardLink="/tv"
         renderItem={(series, index) => (
-          <VerticalCard
+          <VerticalCard<TVSeries>
             cardContent={series}
             key={index}
             index={index}

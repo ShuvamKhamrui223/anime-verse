@@ -16,5 +16,3 @@ const ImageWithFallback: FC<ImageProps> = (props) => {
     );
 };
 export default ImageWithFallback;
-// Usage:
-// <ImageWithFallback src={externalImageUrl} width={500} height={300} alt="Description" />

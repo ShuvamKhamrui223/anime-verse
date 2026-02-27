@@ -3,7 +3,7 @@ import VerticalCard from "@/components/ui/cards/vertical-card";
 import { TVSeries } from "@/types/top-tv-series";
 import { getTopAnimeTVSeries } from "@/utils/data-fetching";
 
-const seriespage = async () => {
+const page = async () => {
   const topSeries = await getTopAnimeTVSeries();
   if (topSeries.data.length === 0) {
     return <p className="text-lg text-zinc-200">no content found</p>;
@@ -27,4 +27,4 @@ const seriespage = async () => {
   );
 };
 
-export default seriespage;
+export default page;

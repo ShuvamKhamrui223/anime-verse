@@ -89,17 +89,6 @@ export const getAnimeDetailsById = async ({ id }: { id: string }) => {
 
 }
 
-export const getAnimeGenres = async () => {
-    const newURL = new URL(`https://api.jikan.moe/v4/gneres/anime/`)
-    const res = await fetchAnime(newURL)
-    return res as IGenres
-}
-
-export const getAnimeByGenreName = async ({ genreId }: { genreId: string }) => {
-    const newURL = new URL(`https://api.jikan.moe/v4/gneres/anime/`)
-    const res = await fetchAnime(newURL)
-    return res as IGenres
-}
 
 export const getEpisodesByAnimeId = async ({ animeId }: { animeId: number }) => {
     const newURL = new URL(`https://api.jikan.moe/v4/anime/${animeId}/episodes`)

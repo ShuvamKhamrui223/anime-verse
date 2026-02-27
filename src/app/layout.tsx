@@ -35,14 +35,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // <ClerkProvider appearance={{ theme: [dark] }}>
-    <html lang="en">
-      <body className={`${raleway.variable} ${quickSand.variable} antialiased`}>
-        {children}
-        <NextTopLoader color="orange" showSpinner={false} />
-        {/* <footer>Anime Finder Footer footer</footer> */}
-      </body>
-    </html>
-    // </ClerkProvider>
+    <ClerkProvider appearance={{ theme: [dark] }}>
+      <html lang="en">
+        <body
+          className={`${raleway.variable} ${quickSand.variable} antialiased`}
+        >
+          {children}
+          <NextTopLoader color="orange" showSpinner={false} />
+          {/* <footer>Anime Finder Footer footer</footer> */}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

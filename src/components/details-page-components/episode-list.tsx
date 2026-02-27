@@ -20,7 +20,7 @@ const EpisodeList = async ({ animeId }: { animeId: number }) => {
       <h3 className="text-2xl font-semibold text-zinc-200 capitalize">
         episodes
       </h3>
-      <ul className="flex gap-8 items-center overflow-x-hidden">
+      <ul className="flex gap-8 items-center overflow-x-auto">
         {data?.data?.map((episode) => (
           <li key={episode.title} className="shrink-0 basis-2xs flex flex-col">
             <Link href={episode?.url ?? ""}>

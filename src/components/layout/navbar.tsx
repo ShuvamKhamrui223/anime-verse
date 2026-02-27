@@ -22,7 +22,6 @@ export const Navbar = () => {
     { label: "manga", url: "/manga" },
     { label: "tv series", url: "/tv" },
     { label: "movies", url: "/movies" },
-    { label: "genres", url: "/genres" },
   ];
 
   const toggleSidebar = () => {
@@ -52,16 +51,16 @@ export const Navbar = () => {
         </ul>
 
         <div className="space-x-4 hidden md:block">
-          {/* <ClerkLoaded>
+          <ClerkLoaded>
             <SignedOut>
               <SignInButton>
-                <button className=" px-4 py-2 capitalize rounded cursor-pointer outline-amber-700 outline">
+                <button className="sign-in-btn">
                   sign in
                 </button>
               </SignInButton>
 
               <SignUpButton>
-                <button className="bg-amber-800 px-4 py-2 capitalize rounded cursor-pointer">
+                <button className="sign-up-btn">
                   sign up
                 </button>
               </SignUpButton>
@@ -69,16 +68,19 @@ export const Navbar = () => {
             <SignedIn>
               <UserButton />
             </SignedIn>
-          </ClerkLoaded> */}
+          </ClerkLoaded>
         </div>
         <div className="block md:hidden">
-          {/* <ClerkLoaded>
+          <ClerkLoaded>
             <SignedIn>
               <UserButton />
             </SignedIn>
-          </ClerkLoaded> */}
+          </ClerkLoaded>
         </div>
-        <button className="md:hidden cursor-pointer select-none" onClick={toggleSidebar}>
+        <button
+          className="md:hidden cursor-pointer select-none"
+          onClick={toggleSidebar}
+        >
           <Image
             src="/menu.svg"
             alt="menu"

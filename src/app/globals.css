@@ -56,6 +56,12 @@
 }
 
 @layer utilities {
+  .sign-in-btn {
+    @apply px-4 py-2 capitalize rounded cursor-pointer outline-amber-700 text-amber-600 outline
+  }
+.sign-up-btn{
+  @apply bg-amber-800 text-orange-100 px-4 py-2 capitalize rounded cursor-pointer
+}
   .section-padding {
     @apply px-4 md:px-10 pt-2 pb-6 md:py-4;
   }

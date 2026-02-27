@@ -36,21 +36,21 @@ const MobileNav = ({
         />
       </button>
       <div className="flex items-center gap-5">
-        {/* <ClerkLoaded>
+        <ClerkLoaded>
           <SignedOut>
             <SignInButton>
-              <button className=" px-4 py-2 capitalize rounded cursor-pointer outline-amber-700 outline">
+              <button className="sign-in-btn">
                 sign in
               </button>
             </SignInButton>
 
             <SignUpButton>
-              <button className="bg-amber-800 px-4 py-2 capitalize rounded cursor-pointer">
+              <button className="sign-up-btn">
                 sign up
               </button>
             </SignUpButton>
           </SignedOut>
-        </ClerkLoaded> */}
+        </ClerkLoaded>
       </div>
       <ul className="flex flex-col gap-4 select-none">
         {menuItems.map((item) => (

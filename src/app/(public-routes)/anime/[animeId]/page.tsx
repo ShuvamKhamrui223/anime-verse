@@ -4,20 +4,20 @@ import { notFound } from "next/navigation";
 import DetailsSections from "@/components/details-page-components/details-sections";
 
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ animeId: string }>;
-}): Promise<Metadata> {
-  const { animeId } = await params;
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{ animeId: string }>;
+// }): Promise<Metadata> {
+//   const { animeId } = await params;
 
-  const anime = await getAnimeDetailsById({ id: animeId });
+//   const anime = await getAnimeDetailsById({ id: animeId });
 
-  return {
-    title: anime.data.title,
-    description: anime.data.background,
-  };
-}
+//   return {
+//     title: anime.data.title,
+//     description: anime.data.background,
+//   };
+// }
 
 const page = async ({ params }: { params: Promise<{ animeId: string }> }) => {
   const { animeId } = await params;

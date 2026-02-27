@@ -4,20 +4,20 @@ import DetailsSections from "../../../../components/details-page-components/deta
 import { IFullDetails } from "@/types/anime-details";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ movieId: string }>;
-}): Promise<Metadata> {
-  const { movieId } = await params;
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{ movieId: string }>;
+// }): Promise<Metadata> {
+//   const { movieId } = await params;
 
-  const anime = await getAnimeDetailsById({ id: movieId });
+//   const anime = await getAnimeDetailsById({ id: movieId });
 
-  return {
-    title: anime.data.title,
-    description: anime.data.background,
-  };
-}
+//   return {
+//     title: anime.data.title,
+//     description: anime.data.background,
+//   };
+// }
 
 const page = async ({ params }: { params: Promise<{ movieId: string }> }) => {
   const { movieId } = await params;

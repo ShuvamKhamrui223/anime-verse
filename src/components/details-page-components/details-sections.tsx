@@ -35,9 +35,9 @@ function DetailsSections<T extends IFullDetails>({ animeDetails }: DetailsSectio
 
       <div className="flex flex-col lg:flex-row">
         {/* reviews  */}
-        <Suspense>
+        {/* <Suspense>
           <LazyReviews />
-        </Suspense>
+        </Suspense> */}
         {/* latest news */}
         <Suspense>
           <LazyLatestNews animeId={animeDetails.mal_id} />

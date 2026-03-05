@@ -32,4 +32,14 @@ task for 25/02/2026
 
 ### My plan for generic card and cardlist along with infinite loading
 
-1. create a compound card list component
+I have used render props method to tackel this problem.
+
+if no userId
+create user record + save the content
+else
+save the content
+
+if user has content
+delete content
+else
+add content

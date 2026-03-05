@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 import { IAnimeDetails } from "@/types/anime-details";
 import { AnimeNews } from "@/types/anime-news";
 import { AnimeRecommendations } from "@/types/anime-recommendations";

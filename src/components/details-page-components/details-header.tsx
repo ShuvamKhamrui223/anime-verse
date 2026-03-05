@@ -1,13 +1,26 @@
 import Chip from "@/components/ui/chip";
 import { IFullDetails } from "@/types/anime-details";
 import Image from "next/image";
+import { Suspense } from "react";
+import UserActionButtonSkeleton from "../skeletons/user-action-button-skeleton";
+import { ClerkLoaded } from "@clerk/nextjs";
+import dynamic from "next/dynamic";
 
+const UserActionButtons = dynamic(
+  () => import("../ui/buttons/user-action-buttons"),
+);
 interface DetailsHeaderProps<T> {
   data: T;
 }
 function DetailsHeader<T extends IFullDetails>({
   data,
 }: DetailsHeaderProps<T>) {
+  const watchlistData = {
+    animeId: String(data.mal_id),
+    title: data.title,
+    poster_url: data.images.webp.image_url || data.images.jpg.image_url,
+    type: data.type,
+  };
   return (
     <section className="flex flex-col md:flex-row md:gap-12">
       <div className="h-100 md:h-180 md:basis-1/3 relative flex items-center justify-center p-10 bg-linear-to-b from-zinc-700 to-transparent rounded-3xl">
@@ -27,7 +40,7 @@ function DetailsHeader<T extends IFullDetails>({
       <div className="flex flex-col px-8 py-6">
         <div className="flex items-center gap-4">
           <p className="inline-flex text-orange-400">
-            <Image src={"/star.svg"} alt="star icon" height={15} width={15}  />
+            <Image src={"/star.svg"} alt="star icon" height={15} width={15} />
             <span className="ml-2 font-medium text-lg">
               {data.score} Rating
             </span>
@@ -75,7 +88,7 @@ function DetailsHeader<T extends IFullDetails>({
           </div>
         </div>
 
-        <ul className="flex flex-wrap gap-3 items-center mt-10">
+        <ul className="flex flex-wrap gap-3 items-center my-10">
           {data.genres.map((g) => (
             <Chip
               key={g.name}
@@ -85,6 +98,12 @@ function DetailsHeader<T extends IFullDetails>({
             />
           ))}
         </ul>
+
+        <Suspense fallback={<UserActionButtonSkeleton />}>
+        <ClerkLoaded>
+          <UserActionButtons data={watchlistData} />
+        </ClerkLoaded>
+        </Suspense>
       </div>
     </section>
   );

@@ -19,9 +19,9 @@ export const Navbar = () => {
   const [isSidebarOpen, setisSidebarOpen] = useState(false);
   const menuItems = [
     { label: "home", url: "/" },
-    { label: "manga", url: "/manga" },
     { label: "tv series", url: "/tv" },
     { label: "movies", url: "/movies" },
+    { label: "my space", url: "/my-space" },
   ];
 
   const toggleSidebar = () => {

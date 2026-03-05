@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import FramerCard from "./framer-card";
 import { singleAnime } from "@/types/top-anime";
@@ -10,7 +9,11 @@ interface Props<T> {
   index: number;
 }
 
-function VerticalCard<T extends singleAnime>({ cardContent, link, index }: Props<T>) {
+function VerticalCard<T extends singleAnime>({
+  cardContent,
+  link,
+  index,
+}: Props<T>) {
   return (
     <FramerCard
       initial={{ opacity: 0, y: 20 }}
@@ -31,6 +34,7 @@ function VerticalCard<T extends singleAnime>({ cardContent, link, index }: Props
             alt={cardContent.title_english ?? cardContent.title}
             fill
           />
+          {/* <AddToWatchlistButton /> */}
           {cardContent.score ? (
             <div className="absolute top-5 right-5 bg-zinc-900 rounded-full px-2">
               <span className="text-orange-400 text-center text-xs">
